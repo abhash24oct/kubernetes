@@ -9,7 +9,7 @@ spec:
     metadata:
       name: db
       labels:
-      db: postgres
+        db: postgres
     spec:
       containers:
         - name: db
