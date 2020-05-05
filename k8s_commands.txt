@@ -51,9 +51,10 @@ $kubectl set image deploy/myapp-deployment --image nginx:1.9.1
 >>Update the image for the deployment , the yml file wint chaneg
 
 $kubectl rollout status deploy/myapp-deployment
->>Update status
+>> wheneever  we create a deployment the a rollout is created whose staus can be seen by this command 
 
 $kubectl rollout history deploy/myapp-deployment
->> history of Update
+>> whenever we do any update , a new revision is created, in oorder to see the command in the reveision we can use --record (kubectl create -f deployment-definition.yml --record)
 
 $kubectl rollout undo deploy/myapp-deployment
+>> whenever we do a rollback it goes to the previous revision and the previous revision is gone and a new revision is created
