@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name : voting-app
-          image: eesprit/voting-app-vote
+          image: dockersamples/examplevotingapp_vote
           ports:
             - containerPort: 80
   selector:
