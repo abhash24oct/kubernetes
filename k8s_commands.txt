@@ -1,0 +1,39 @@
+$kubectl get pods
+
+$kubectl get services
+
+$kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080
+--> Create service of type NodePort and expose a port 
+
+$kubectl describe services/kubernetes-bootcamp
+>>To find out what port was opened externall and other details about the service
+
+$kubectl describe deployment
+>>The Deployment created automatically a label for our Pod.
+
+$kubectl get pods -l run=kubernetes-bootcamp
+>>use this label to query our list of Pods. We’ll use the kubectl get pods command with -l as a parameter, followed by the label values:
+
+
+$kubectl get services -l run=kubernetes-bootcamp
+>>You can do the same to list the existing services:
+
+
+$kubectl label pod $POD_NAME app=v1
+>>To apply a new label we use the label command followed by the object type, object name and the new label:
+
+kubectl label pod myttpd-687bc7458b-b9284 app=v1
+
+
+kubectl get pods -l app=v1
+>>
+
+$kubectl delete service -l run=kubernetes-bootcamp
+>>Delete all the service with the label
+
+$kubectl describe pods <pod-nmae>
+> Details of the pod
+
+$kubectl get pods -o wide 
+>>more details than get pods
+
