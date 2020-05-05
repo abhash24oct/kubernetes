@@ -37,3 +37,23 @@ $kubectl describe pods <pod-nmae>
 $kubectl get pods -o wide 
 >>more details than get pods
 
+
+$kubectl create -f deployment-definition.yml
+>>Create a deployment
+
+$kubectl get deployments
+>> Get deployments
+
+$kubectl apply -f deployment-definition.yml
+>>Update a deployment
+
+$kubectl set image deploy/myapp-deployment --image nginx:1.9.1
+>>Update the image for the deployment , the yml file wint chaneg
+
+$kubectl rollout status deploy/myapp-deployment
+>>Update status
+
+$kubectl rollout history deploy/myapp-deployment
+>> history of Update
+
+$kubectl rollout undo deploy/myapp-deployment
