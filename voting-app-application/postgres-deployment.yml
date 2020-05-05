@@ -16,7 +16,7 @@ spec:
           image: postgres
           env:
             - name: POSTGRES_PASSWORD
-              value: "postgres"
+              value: postgres
           ports:
             - containerPort: 5432
   selector:
