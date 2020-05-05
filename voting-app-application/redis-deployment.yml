@@ -6,15 +6,16 @@ metadata:
 spec:
   replicas: 1
   template:
-    name: redis
-    labels:
-     db: redis
-  spec:
+    metadata:
+      name: redis
+      labels:
+      db: redis
+    spec:
       containers:
         - name: redis
           image: redis
           ports:
-            containerPort: 6379
+            - containerPort: 6379
   selector:
     matchLabels:
       db: redis 
