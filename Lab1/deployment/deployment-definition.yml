@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployement
 metadata:
-  name: frontend
+  name: myapp-deployment
   labels:
-    app: mywebsite
+    app: myapp
     tier: frontend
 spec:
   replicas: 4
@@ -17,3 +17,5 @@ spec:
           - name: nginx
             image: nginx
   selector:
+    matchLabels:
+      app: myapp

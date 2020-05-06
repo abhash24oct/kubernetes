@@ -58,3 +58,60 @@ $kubectl rollout history deploy/myapp-deployment
 
 $kubectl rollout undo deploy/myapp-deployment
 >> whenever we do a rollback it goes to the previous revision and the previous revision is gone and a new revision is created
+
+Scale app:
+
+>>kubectl replace -f replicatset-def.yml
+>>kubectl scale --replicas=6 -f replicaset-def.yml
+>>kubectl scale --replicas=6  replicaset my-replicaset
+--> kubectl scale --replicas=<no of replicas> <Type of object> <name of the object>
+
+Exporting yml for any object
+$kubectl get replicaset -o yaml > new-replica-set.yml
+
+
+Generate POD Manifest YAML file (-o yaml). Don't create it(--dry-run)
+$kubectl run --generator=run-pod/v1 nginx --image=nginx --dry-run -o yaml
+
+Create a deployment
+$kubectl create deployment --image=nginx nginx
+
+Generate Deployment YAML file (-o yaml). Don't create it(--dry-run)
+$kubectl create deployment --image=nginx nginx --dry-run -o yaml
+
+
+Namespaces:
+
+$kubectl create namespace dev
+ 
+ >>Accesing a service in other namespace
+  <service_name>.<namespace>.svc.cluster.local
+>>By default we are in default namespace,to switch the default namespace use the below command
+
+$kubectl config set-context $(kubectl config current-context) --namespace=dev
+
+$kubectl get pods --namespace=dev
+
+$kubectl get pods --all-namespaces
+
+$kubectl run nginx --image=nginx --restart=Never
+>> This tells the kubernetes not to create a deployment
+
+$kubectl create service nodeport webapp-service --tcp 8080:8080 --dry-run -o yaml > service-def.yml
+$ kubectl create service <typeOfService> <name-of-service> --tcp port:targetport --dry-run -o yaml > service-def.yml
+>>Above are the minimum thing req to create a service , the above command does create the selector and it cant be  passed as well so use the below command
+
+$kubectl expose pod redis --port=6379 --name redis-service --dry-run -o yaml
+
+$kubectl expose pod nginx --port=80 --name nginx-service --dry-run -o yaml
+--> Node port cant be provided , so the yaml needs to be edited
+
+$ kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run -o yaml
+
+Generate Deployment YAML file (-o yaml). Don't create it(--dry-run)
+
+kubectl create deployment --image=nginx nginx --dry-run -o yaml
+>>>kubectl create deployment does not have a --replicas option. You could first create it and then scale it using the kubectl scale command.
+
+kubectl create deployment --image=nginx nginx --dry-run -o yaml > nginx-deployment.yaml
+
