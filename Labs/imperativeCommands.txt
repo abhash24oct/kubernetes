@@ -1,0 +1,8 @@
+$kubectl run nginx-pod --image nginx:alpine --restart=Never --dry-run -o yaml >pod-def.yml
+$kubectl run redis --image redis:alpine --restart=Never -l tier=db --dry-run -o yaml >redis-pod-def.yml
+$kubectl expose pod redis --port 6379 --name redis-service --dry-run -o yaml > redis-serv-def.yml
+-->Make target port same as port
+$kubectl expose pod redis --port 6379 --target-port 6348 --name redis-service --dry-run -o yaml > redis-serv-def.yml
+
+$kubectl create deployment webapp --image kodekloud/webapp-color --dry-run -o yaml > webapp-def.yml
+>> since we cant give the replica in the command line we need to edit the yml generated
