@@ -26,9 +26,9 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-	            - key: color
+              - key: color 
                 operator: In
-	              values: 
-	              - blue
+                values:
+                - blue
 		
 status: {}
