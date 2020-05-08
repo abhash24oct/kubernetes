@@ -103,10 +103,13 @@ $ kubectl create service <typeOfService> <name-of-service> --tcp port:targetport
 
 $kubectl expose pod redis --port=6379 --name redis-service --dry-run -o yaml
 
-$kubectl expose pod nginx --port=80 --name nginx-service --dry-run -o yaml
+$kubectl expose pod nginx --port=80 --type NodePort --name nginx-service --dry-run -o yaml
 --> Node port cant be provided , so the yaml needs to be edited
 
 $ kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run -o yaml
+
+$kubectl get ep webapp-service
+>>Get endpoint for service
 
 Generate Deployment YAML file (-o yaml). Don't create it(--dry-run)
 
@@ -115,3 +118,31 @@ kubectl create deployment --image=nginx nginx --dry-run -o yaml
 
 kubectl create deployment --image=nginx nginx --dry-run -o yaml > nginx-deployment.yaml
 
+
+NOTE:
+ Only Job, Deployment, Replica Set, and Daemon Set support matchLabels.
+
+ $kubectl get pods -l env=prod,tier=frontend,bu=finance
+>> Multi label selector
+
+
+Taints and tolerations
+
+Node : Taint and POds has tolerations
+
+master node always has a taint node-role.kubernetes.io/master:NoSchedule ,so no pods are scheduled on the node
+
+ $ kubectl taint node node01 spary=mortein:NoSchedule
+ $ kubectl describe node/node01 | grep Taints
+Taints:             spary=mortein:NoSchedule
+
+Effect cane be  NoSchedule,PreferNoSchedule,NoExecute
+
+--To remove a taint from node
+kubectl taint node master node-role.kubernetes.io/master:NoSchedule-
+
+
+Node Selector & Node Affinity 
+
+Label a node:
+kubectl label node node01 key=values
