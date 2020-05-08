@@ -146,3 +146,40 @@ Node Selector & Node Affinity
 
 Label a node:
 kubectl label node node01 key=values
+
+
+Remember, you CANNOT edit specifications of an existing POD other than the below.
+spec.containers[*].image
+spec.initContainers[*].image
+spec.activeDeadlineSeconds
+spec.tolerations
+---
+
+wheneever we make changes to deployment the pods are deleted and created again , so if pod is a child of deployment then we can edit any prop
+
+Setting limits :
+Need to apply these yaml to achieve the default behaviour
+
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: mem-limit-range
+spec:
+  limits:
+  - default:
+      memory: 512Mi
+    defaultRequest:
+      memory: 256Mi
+    type: Container
+
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: cpu-limit-range
+spec:
+  limits:
+  - default:
+      cpu: 1
+    defaultRequest:
+      cpu: 0.5
+    type: Container
