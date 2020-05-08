@@ -1,2 +1,4 @@
-preferredDuringSchedulingIgnoredDuringExecution --> NodeAffity 
-Daphney mind reading 
+preferredDuringSchedulingIgnoredDuringExecution --> NodeAffity  how to  
+https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+
+
